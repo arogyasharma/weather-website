@@ -1,6 +1,6 @@
-const weartherform= document.getElementById("head");
-const cityinput= document.getElementById("city");
-const card = document.getElementById("content");
+const weartherform= document.querySelector(".head");
+const cityinput= document.querySelector(".city");
+const card = document.querySelector(".content");
 
 const apikey="61265f77c8cae794363bfc75b8b92b0a"
 
@@ -52,33 +52,51 @@ function displayweatherinfo(data){
            const humiditydisplay= document.createElement("p");
            const speeddisplay= document.createElement("p");
            const descdisplay= document.createElement("p");
-           const emojidisplay= document.createElement("p");
+           const weatheremoji= document.createElement("p");
 
            citydisplay.textContent= city;
-           tempdisplay.textContent= temp;
-           humiditydisplay.textContent= humidity;
-           speeddisplay.textContent= speed;
+           tempdisplay.textContent= `${(temp-273.15).toFixed(1)}°c`;
+           humiditydisplay.textContent=  `Humidity: ${humidity}%`;
+           speeddisplay.textContent=  `wind speed: ${speed}km/h`;
            descdisplay.textContent= description;
-           emojidisplay.textContent= id;
+           weatheremoji.textContent= getweatheremoji(id);
 
            citydisplay.classList.add("citydisplay");
            tempdisplay.classList.add("tempdisplay");
            humiditydisplay.classList.add("humiditydisplay");
            speeddisplay.classList.add("speeddisplay");
            descdisplay.classList.add("descdisplay");
-           emojidisplay.classList.add("emojidisplay");
+           weatheremoji.classList.add("weatheremoji");
 
 
-           card.append(citydisplay);
-           card.append(tempdisplay);
-           card.append(humidity);
-           card.append(speeddisplay);
-           card.append(descdisplay);
-           card.append(emojidisplay);
+           card.appendChild(citydisplay);
+           card.appendChild(tempdisplay);
+           card.appendChild(humiditydisplay);
+           card.appendChild(speeddisplay);
+           card.appendChild(descdisplay);
+           card.appendChild(weatheremoji);
 
 }
 
 function getweatheremoji(weatherid){
+    switch(true){
+        case (weatherid >= 200 && weatherid < 300):
+            return "⛈️";
+        case (weatherid >= 300 && weatherid < 400):
+            return "🌧️";
+        case (weatherid >= 500 && weatherid < 600):
+            return "🌦️";
+        case (weatherid >= 600 && weatherid < 700):
+            return "❄️";
+        case (weatherid >= 700 && weatherid < 800):
+            return "💨";
+        case (weatherid === 800):
+            return "☀️";
+        case (weatherid >= 801 && weatherid < 810):
+            return "☁️";
+        default:
+            return "❓";
+    }
 
 }
 

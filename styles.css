@@ -1,84 +1,75 @@
-*{
-    background-color: rgba(223, 223, 223, 0.998);
-}
-
 body{
-    padding: 0%;
+    font-family: Arial, sans-serif;
+    background-color: hsl(0, 0%, 95%);
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-#head{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.head{
+    margin: 20px;
+}
+.city{
     padding: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 2px solid hsla(0, 0%, 20%, 0.3);
+    border-radius: 10px;
     margin: 10px;
-
-    
-    
-    
+    width: 300px;
 }
-
-#content{
-    display: flexbox;
-    justify-items: center;
-    align-items: center;
-    justify-self: center;
-    border-radius: 10px;
-    width: 30%;
-    padding: 5%;
-    background: url(background.jpg)no-repeat;
-    background-size: cover;
-    color: white;
-    font-weight: 500;
-    border: 2px solid black;
-
-}
-
-
-#city{
-    border-radius: 10px;
-   font-size: 1.5rem;
-   border: 2px solid black;
-    
-
-}
-
-#button{
-    border-radius: 5px;
-    font-size: 1.5rem;
-    background-color: rgba(25, 214, 25, 0.888);
+button[type="submit"]{
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: hsl(122, 39%, 50%);
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-
 }
-
+button[type="submit"]:hover{
+    background-color: hsl(122, 39%, 40%);
+}
+.content{
+    background: linear-gradient(180deg, hsl(210, 100%, 75%), hsl(40, 100%, 75%));
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 h1{
-    font-weight: bold;
-    font-size: 3rem;
-    box-shadow: 2px black;
+    margin-top: 0;
     margin-bottom: 25px;
 }
-
 p{
     font-size: 1.5rem;
     margin: 5px 0;
-
 }
-
-#emoji{
+.citydisplay, .tempdisplay{
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: hsla(0, 0%, 0%, 0.8);
+    margin-bottom: 25px;
+}
+.humiditydisplay{
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+.descdisplay{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.weatheremoji{
+    margin: 0;
+    font-size: 7.5rem;
+}
+.errordisplay{
     font-size: 2.5rem;
     font-weight: bold;
+    color: hsla(0, 0%, 0%, 0.75);
 }
-
-.errordisplay{
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    font-size: 2.5rem;
-    font-weight: 900;
-    background-color: blanchedalmond;
-    
-}
-
