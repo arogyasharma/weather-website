@@ -1,75 +1,137 @@
-body{
-    font-family: Arial, sans-serif;
-    background-color: hsl(0, 0%, 95%);
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     margin: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-.head{
-    margin: 20px;
-}
-.city{
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+
+  .container {
+    width: 100%;
+    max-width: 500px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  header p {
+    margin: 5px 0 20px;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+ 
+  .head {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .city {
     padding: 10px;
-    font-size: 2rem;
-    font-weight: bold;
-    border: 2px solid hsla(0, 0%, 20%, 0.3);
-    border-radius: 10px;
-    margin: 10px;
-    width: 300px;
-}
-button[type="submit"]{
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 60%;
+    transition: border-color 0.3s;
+  }
+  
+  .city:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  button[type="submit"] {
     padding: 10px 20px;
-    font-weight: bold;
-    font-size: 2rem;
-    background-color: hsl(122, 39%, 50%);
+    font-size: 1.2rem;
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-button[type="submit"]:hover{
-    background-color: hsl(122, 39%, 40%);
-}
-.content{
-    background: linear-gradient(180deg, hsl(210, 100%, 75%), hsl(40, 100%, 75%));
-    padding: 50px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
-    min-width: 300px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+
+  .content {
+    background: linear-gradient(180deg, #6dd5ed, #2193b0);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-h1{
+    color: #fff;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+  h1, .citydisplay {
     margin-top: 0;
-    margin-bottom: 25px;
-}
-p{
-    font-size: 1.5rem;
-    margin: 5px 0;
-}
-.citydisplay, .tempdisplay{
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: hsla(0, 0%, 0%, 0.8);
-    margin-bottom: 25px;
-}
-.humiditydisplay{
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-.descdisplay{
-    font-style: italic;
-    font-weight: bold;
-    font-size: 2rem;
-}
-.weatheremoji{
-    margin: 0;
-    font-size: 7.5rem;
-}
-.errordisplay{
+    margin-bottom: 15px;
     font-size: 2.5rem;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  .tempdisplay {
+    font-size: 2rem;
     font-weight: bold;
-    color: hsla(0, 0%, 0%, 0.75);
-}
+  }
+  
+  .humiditydisplay,
+  .speeddisplay {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .descdisplay {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  
+  .weatheremoji {
+    font-size: 4rem;
+    margin-top: 15px;
+  }
+  
+  .errordisplay {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff4d4d;
+  }
+  
