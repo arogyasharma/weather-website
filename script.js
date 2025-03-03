@@ -1,112 +1,92 @@
-const weartherform= document.querySelector(".head");
-const cityinput= document.querySelector(".city");
+const weatherForm = document.querySelector(".head");
+const cityInput = document.querySelector(".city");
 const card = document.querySelector(".content");
 
-const apikey="61265f77c8cae794363bfc75b8b92b0a"
+const apikey = "61265f77c8cae794363bfc75b8b92b0a";
 
-weartherform.addEventListener("submit",async event=>{
-    event.preventDefault();
-
-    const city= cityinput.value;
-    if(city){
-        try{
-            const weatherdata= await getweatherdata(city);
-            displayweatherinfo(weatherdata);
-
-        }
-        catch(error){
-            console.error(error);
-            displayerror(error);
-        }
-
+weatherForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const city = cityInput.value.trim();
+  if (city) {
+    try {
+      const weatherData = await getWeatherData(city);
+      displayWeatherInfo(weatherData);
+    } catch (error) {
+      displayError(error.message);
     }
-    else{
-        displayerror("please enter a city");
-    }
-
-
+  } else {
+    displayError("Please enter a city");
+  }
 });
 
-async function getweatherdata(city){
-    const apiurl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`;
-    const response = await fetch(apiurl);
-    console.log(response);
-    if(!response.ok){
-        throw new Error("could not fetch data");
-    }
-        return await response.json();   
+async function getWeatherData(city) {
+  const apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`;
+  const response = await fetch(apiurl);
+  if (!response.ok) {
+    throw new Error("Could not fetch data");
+  }
+  return await response.json();
 }
 
-function displayweatherinfo(data){
-    console.log(data);
+function displayWeatherInfo(data) {
+  const {
+    name: city,
+    main: { temp, humidity },
+    wind: { speed },
+    weather: [{ description, id }],
+  } = data;
 
-    const {name:city,
-           main:{temp,humidity}, 
-           wind:{speed},
-           weather:[{description,id}]} = data;
+  card.innerHTML = "";
+  card.style.display = "flex";
 
-           card.textContent="";
-           card.style.display="flex";
-           const citydisplay= document.createElement("h1");
-           const tempdisplay= document.createElement("p");
-           const humiditydisplay= document.createElement("p");
-           const speeddisplay= document.createElement("p");
-           const descdisplay= document.createElement("p");
-           const weatheremoji= document.createElement("p");
+  const cityDisplay = document.createElement("h1");
+  cityDisplay.textContent = city;
+  cityDisplay.classList.add("citydisplay");
 
-           citydisplay.textContent= city;
-           tempdisplay.textContent= `${(temp-273.15).toFixed(1)}°c`;
-           humiditydisplay.textContent=  `Humidity: ${humidity}%`;
-           speeddisplay.textContent=  `wind speed: ${speed}km/h`;
-           descdisplay.textContent= description;
-           weatheremoji.textContent= getweatheremoji(id);
+  const tempDisplay = document.createElement("p");
+  tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C`;
+  tempDisplay.classList.add("tempdisplay");
 
-           citydisplay.classList.add("citydisplay");
-           tempdisplay.classList.add("tempdisplay");
-           humiditydisplay.classList.add("humiditydisplay");
-           speeddisplay.classList.add("speeddisplay");
-           descdisplay.classList.add("descdisplay");
-           weatheremoji.classList.add("weatheremoji");
+  const humidityDisplay = document.createElement("p");
+  humidityDisplay.textContent = `Humidity: ${humidity}%`;
+  humidityDisplay.classList.add("humiditydisplay");
 
+  const speedDisplay = document.createElement("p");
+  speedDisplay.textContent = `Wind Speed: ${speed} km/h`;
+  speedDisplay.classList.add("speeddisplay");
 
-           card.appendChild(citydisplay);
-           card.appendChild(tempdisplay);
-           card.appendChild(humiditydisplay);
-           card.appendChild(speeddisplay);
-           card.appendChild(descdisplay);
-           card.appendChild(weatheremoji);
+  const descDisplay = document.createElement("p");
+  descDisplay.textContent = description;
+  descDisplay.classList.add("descdisplay");
 
+  const weatherEmoji = document.createElement("p");
+  weatherEmoji.textContent = getWeatherEmoji(id);
+  weatherEmoji.classList.add("weatheremoji");
+
+  card.appendChild(cityDisplay);
+  card.appendChild(tempDisplay);
+  card.appendChild(humidityDisplay);
+  card.appendChild(speedDisplay);
+  card.appendChild(descDisplay);
+  card.appendChild(weatherEmoji);
 }
 
-function getweatheremoji(weatherid){
-    switch(true){
-        case (weatherid >= 200 && weatherid < 300):
-            return "⛈️";
-        case (weatherid >= 300 && weatherid < 400):
-            return "🌧️";
-        case (weatherid >= 500 && weatherid < 600):
-            return "🌦️";
-        case (weatherid >= 600 && weatherid < 700):
-            return "❄️";
-        case (weatherid >= 700 && weatherid < 800):
-            return "💨";
-        case (weatherid === 800):
-            return "☀️";
-        case (weatherid >= 801 && weatherid < 810):
-            return "☁️";
-        default:
-            return "❓";
-    }
-
+function getWeatherEmoji(weatherid) {
+  if (weatherid >= 200 && weatherid < 300) return "⛈️";
+  if (weatherid >= 300 && weatherid < 400) return "🌧️";
+  if (weatherid >= 500 && weatherid < 600) return "🌦️";
+  if (weatherid >= 600 && weatherid < 700) return "❄️";
+  if (weatherid >= 700 && weatherid < 800) return "💨";
+  if (weatherid === 800) return "☀️";
+  if (weatherid >= 801 && weatherid < 810) return "☁️";
+  return "❓";
 }
 
-function displayerror(message){
-
-    const errordisplay = document.createElement("p");
-  errordisplay.textContent = message;
-  errordisplay.classList.add("errordisplay");
-    
-    card.textContent="";
-    card.style.display="flex";
-    card.appendChild(errordisplay);
+function displayError(message) {
+  card.innerHTML = "";
+  card.style.display = "flex";
+  const errorDisplay = document.createElement("p");
+  errorDisplay.textContent = message;
+  errorDisplay.classList.add("errordisplay");
+  card.appendChild(errorDisplay);
 }
