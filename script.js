@@ -1,6 +1,6 @@
-const weatherForm = document.querySelector(".head");
-const cityInput = document.querySelector(".city");
-const card = document.querySelector(".content");
+const weatherForm = document.querySelector(".weather-form");
+const cityInput = document.querySelector(".city-input");
+const card = document.querySelector(".weather-card");
 
 const apikey = "61265f77c8cae794363bfc75b8b92b0a";
 
@@ -28,47 +28,64 @@ async function getWeatherData(city) {
   return await response.json();
 }
 
-function displayWeatherInfo(data) {
-  const {
-    name: city,
-    main: { temp, humidity },
-    wind: { speed },
-    weather: [{ description, id }],
-  } = data;
 
-  card.innerHTML = "";
-  card.style.display = "flex";
+  function displayWeatherInfo(data) {
+    const {
+        name: city,
+        main: { temp, humidity },
+        wind: { speed },
+        weather: [{ description, id }],
+    } = data;
 
-  const cityDisplay = document.createElement("h1");
-  cityDisplay.textContent = city;
-  cityDisplay.classList.add("citydisplay");
+   
+    card.innerHTML = "";
+    card.style.display = "grid"; 
 
-  const tempDisplay = document.createElement("p");
-  tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C`;
-  tempDisplay.classList.add("tempdisplay");
+    const cityDisplay = document.createElement("h1");
+    cityDisplay.textContent = city;
+    cityDisplay.classList.add("citydisplay");
 
-  const humidityDisplay = document.createElement("p");
-  humidityDisplay.textContent = `Humidity: ${humidity}%`;
-  humidityDisplay.classList.add("humiditydisplay");
+    const weatherEmoji = document.createElement("p");
+    weatherEmoji.textContent = getWeatherEmoji(id);
+    weatherEmoji.classList.add("weatheremoji");
 
-  const speedDisplay = document.createElement("p");
-  speedDisplay.textContent = `Wind Speed: ${speed} km/h`;
-  speedDisplay.classList.add("speeddisplay");
+    
+    const tempDisplay = document.createElement("p");
+    tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}`;
+    tempDisplay.classList.add("tempdisplay");
 
-  const descDisplay = document.createElement("p");
-  descDisplay.textContent = description;
-  descDisplay.classList.add("descdisplay");
+    const descDisplay = document.createElement("p");
+    descDisplay.textContent = description;
+    descDisplay.classList.add("descdisplay");
 
-  const weatherEmoji = document.createElement("p");
-  weatherEmoji.textContent = getWeatherEmoji(id);
-  weatherEmoji.classList.add("weatheremoji");
+    
+    const weatherStats = document.createElement("div");
+    weatherStats.classList.add("weather-stats");
 
-  card.appendChild(cityDisplay);
-  card.appendChild(tempDisplay);
-  card.appendChild(humidityDisplay);
-  card.appendChild(speedDisplay);
-  card.appendChild(descDisplay);
-  card.appendChild(weatherEmoji);
+
+    const humidityStat = document.createElement("div");
+    humidityStat.classList.add("weather-stat");
+    humidityStat.innerHTML = `
+        <i class="fas fa-tint"></i>
+        <span>${humidity}%</span>
+    `;
+
+   
+    const speedStat = document.createElement("div");
+    speedStat.classList.add("weather-stat");
+    speedStat.innerHTML = `
+        <i class="fas fa-wind"></i>
+        <span>${speed} km/h</span>
+    `;
+
+    weatherStats.appendChild(humidityStat);
+    weatherStats.appendChild(speedStat);
+
+    card.appendChild(cityDisplay);
+    card.appendChild(descDisplay);
+    card.appendChild(weatherEmoji);
+    card.appendChild(tempDisplay);
+    card.appendChild(weatherStats);
 }
 
 function getWeatherEmoji(weatherid) {

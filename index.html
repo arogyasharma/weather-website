@@ -4,24 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WeatherSphere</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">WeatherSphere</a>
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
           <h1>Weather Forecast</h1>
-          <p>Enter a city to see the current weather.</p>
+          <p>Enter a city to see the current weather conditions</p>
         </header>
     
-        <form class="head">
-          <input type="text" class="city" placeholder="Enter city" />
-          <button type="submit">Get Weather</button>
+        <form class="weather-form">
+          <input type="text" class="city-input" placeholder="Enter city name...">
+          <button type="submit" class="search-btn"><i class="fas fa-search"></i> Get Weather</button>
         </form>
     
-        <div class="content" style="display: none"></div>
-      </div>
-    
-      <script src="script.js"></script>
+        <div class="weather-card" style="display: none"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 WeatherSphere. All rights reserved.</p>
+            <div class="social-links">
+              <a href="mailto:arogyasharma10@gmail.com"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/arogyasharma?igsh=d2Yzczg5ZTF6bDR0&utm_source=qr"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
